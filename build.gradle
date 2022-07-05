@@ -23,20 +23,16 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
-	runtimeOnly 'mysql:mysql-connector-java'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 	implementation group: 'com.google.guava', name: 'guava', version: '28.1-jre'
 	implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
+	implementation group: 'org.postgresql', name: 'postgresql', version: '42.2.23' 
+    runtimeOnly 'org.postgresql:postgresql'
 
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
-}
-
-bootRun {
-    String activeProfile = System.properties['spring.profiles.active'] 
-    systemProperty "spring.profiles.active", activeProfile
 }
