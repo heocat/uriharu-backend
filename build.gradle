@@ -42,3 +42,4 @@ bootJar {
 	archivesBaseName='uriharu'
 	archiveFileName='uriharu-0.0.1-SNAPSHOT.jar'
 }
+
