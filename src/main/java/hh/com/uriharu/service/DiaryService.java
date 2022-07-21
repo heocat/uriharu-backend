@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import hh.com.uriharu.model.DiaryEntity;
 import hh.com.uriharu.persistence.DiaryRepository;
+import hh.com.uriharu.persistence.ReplyRepository;
 import hh.com.uriharu.persistence.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,7 +22,11 @@ public class DiaryService {
     @Autowired
     private DiaryRepository repository;
 
-    @Autowired UserRepository userRepository;
+    @Autowired
+    private ReplyRepository replyRepository;
+
+    @Autowired 
+    private UserRepository userRepository;
 
 
     public List<DiaryEntity> create(final DiaryEntity entity) {
@@ -81,6 +86,7 @@ public class DiaryService {
         //삭제
         @Modifying
         public void deleteByDto(DiaryEntity entity) {
+            replyRepository.deleteByDno(entity.getDno());
             repository.delete(entity);
         }
 

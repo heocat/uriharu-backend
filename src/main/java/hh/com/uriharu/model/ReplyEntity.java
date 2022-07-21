@@ -1,17 +1,21 @@
 package hh.com.uriharu.model;
 
+
+
 import java.time.LocalDateTime;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -21,7 +25,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-
+import lombok.ToString;
 //오브젝트 생성을 위한 디자인 패턴 중 하나
 //builder 클래스를 개발하지 않고도 builder패턴 이용가능
 @Builder
@@ -32,20 +36,18 @@ import lombok.NoArgsConstructor;
 //클래스 멤버 변수의 getter,setter 메서드를 구현해준다.
 @Data
 @EqualsAndHashCode(callSuper=false)
+@Table(name = "ReplyEntity")
 @Entity
-@Table(name = "Diary")
 @EntityListeners(value = {AuditingEntityListener.class})
-public class DiaryEntity{
-    
+@ToString(exclude = {"diary"})
+public class ReplyEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long dno;
+    private Long rno;    
     private String writer;
     private String nickname;
-    private String title;
     private String contents;
-    private String yyyymmdd;
-    
+
     @CreatedDate
     @Column(name="regdate", updatable=false)
     private LocalDateTime regdate;
@@ -54,6 +56,6 @@ public class DiaryEntity{
     @Column(name="moddate")
     private LocalDateTime moddate;
 
-
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    private DiaryEntity diary;
 }
