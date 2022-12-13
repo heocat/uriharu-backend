@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgressql://ec2-34-239-241-121.compute-1.amazonaws.com:5432/df18cj9dk8k0ol
-    username: ${nleutkhdprpdrq}
-    password: ${186747cde2fa3587f6251a507f3d6e21a2d2097cdb1258a1597bbaae86531536}
+    url: jdbc:postgressql://svc.gksl2.cloudtype.app:31068/uriharu
+    username: ${root}
+    password: ${02070824}
   jpa:
     hibernate:
       ddl-auto: update
